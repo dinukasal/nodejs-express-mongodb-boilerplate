@@ -13,9 +13,11 @@ html
                 vertical-align: top;
                 padding-left:10px;    
             }
-
     body
-        h2 Queues
+        h1  Shopping Experience Survey
+        p(style={padding:'20px'}).
+                Imagine you are in a retail grocery store (Super market) to buy your day to day requirements. Upon
+                buying the required products you come in to the counter area and witness 3 service queues
         //- .container
         //-     .col 
         table(style={margin:'10px','margin-top':'20px'})
@@ -40,7 +42,7 @@ html
                 td#b-l
                 td#c-l
 
-        .container#question(style="display:none;padding:5px;position:absolute;top:50%;left:5%")
+        .container#question(style="display:none;padding:5px;position:absolute;top:65%;left:5%")
             | Which queue do you join? 
             br
             br
@@ -52,7 +54,7 @@ html
             p(style="margin-left:10px") A B C
 
             input(type="text" id="name" name="name" placeholder="your name" style="width:200px")
-            button(type="button" onclick="save()" style="margin-top:20px;margin-left:10px;")="Save"
+            button(type="button" onclick="save()" style="margin-top:20px;margin-left:10px;")="Proceed"
 
         //input(type="button" value="Click" onclick="run()")
         script.
@@ -98,7 +100,7 @@ html
                     }
                     setup();
                     
-                }, 1000); //will call the function after 2 secs.
+                }, 120000); //will call the function after 2 secs.
 
                 setTimeout(function(){
                     $('#question').show();

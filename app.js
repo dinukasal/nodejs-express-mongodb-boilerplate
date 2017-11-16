@@ -14,6 +14,7 @@ var mongoUri = process.env.MONGOLAB_URI ||
 
 var app = express();
 var jsonexport = require('jsonexport');
+console.log(require('dotenv').config())
 
 // configure our server
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -35,13 +36,13 @@ app.set("views", path.join(__dirname, "views"));
 MongoClient.connect(mongoUri, function (err, db) {
 
     assert.equal(null, err);
-    console.log('Successfully connected to mondodb');
+    console.log('Successfully connected to mongodb');
 
     app.get('/', function (req, res) {
-        db.collection('movies').find({}).toArray(function (err, docs) {
+        //db.collection('movies').find({}).toArray(function (err, docs) {
             //res.render('index', { 'movies': docs });
-            res.render("home", { 'movies': docs });
-        });
+            res.render("lines");
+        // });
     });
 
     app.get('/add', function (req, res) {
