@@ -73,7 +73,8 @@ html
                 vals[0]=5; //a
                 vals[1]=2; //a
                 vals[2]=3; //a
-
+                setup();
+                
                 window.setInterval(function () {
                     n=Math.floor(Math.random()*10)%3;
 
@@ -81,7 +82,7 @@ html
                         console.log(vals[n]--);
                     }
 
-                    setup();
+                    
                 }, 1000); //will call the function after 2 secs.
             }
 
