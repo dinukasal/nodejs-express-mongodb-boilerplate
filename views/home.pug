@@ -2,8 +2,16 @@ html
     head
         title Shopping Experience Evaluation
     body
-        h1 hello 
+        h1  Shopping Experience Evaluation
+        p(style={padding:'20px'}).
+                Imagine you are in a retail grocery store (Super market) to buy your day to day requirements. Upon
+                buying the required products you come in to the counter area and witness 3 service queues
+        input(type="button" onclick='gotoLine()' style={margin:'5px'} value="Start")
+        script.
+            setTimeout(function () {
+                //window.location.href = "/lines"; //will redirect to your blog page (an ex: blog.html)
+            }, 2000); //will call the function after 2 secs.
 
-        JSON.stringify(data)    
-        for item in data
-            JSON.stringify(item)
+            function gotoLine(){
+                window.location.href = "/lines"; 
+            }

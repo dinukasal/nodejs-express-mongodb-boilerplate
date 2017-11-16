@@ -10,7 +10,7 @@ var favicon = require('serve-favicon');
 var port = process.env.PORT || 8080;
 var mongoUri = process.env.MONGOLAB_URI ||
     process.env.MONGOHQ_URL ||
-    'mongodb://localhost/video';
+    'mongodb://localhost/piu';
 
 var app = express();
 
@@ -39,14 +39,16 @@ MongoClient.connect(mongoUri, function (err, db) {
     app.get('/', function (req, res) {
         db.collection('movies').find({}).toArray(function (err, docs) {
             //res.render('index', { 'movies': docs });
-            res.render("home", { 'movie': docs });
+            res.render("home", { 'movies': docs });
         });
     });
 
     app.get('/add', function (req, res) {
-        db.collection('movies').find({}).toArray(function (err, docs) {
-            res.render('index', { 'movies': docs });
-        });
+        res.render('add');
+    });
+
+    app.get('/lines', function (req, res) {
+        res.render('lines');
     });
 
     app.post('/', function (req, res) {

@@ -1,0 +1,86 @@
+html
+    head
+        title Sopping mall queues
+        //link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css")
+        script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js")
+        style.
+            th{
+                margin-left:100px;
+                padding-left:10px;    
+                color:blue;
+            }
+            td {
+                vertical-align: top;
+                padding-left:10px;    
+            }
+
+    body
+        h2 Queues
+        //- .container
+        //-     .col 
+        table(style={margin:'10px','margin-top':'20px'})
+            tr#headtag
+                th 
+                th A
+                th B
+                th C
+            tr  
+                th  Queue
+                td#a-q
+                td#b-q
+                td#c-q
+            tr  
+                th  Service Rate
+                td#a-sr
+                td#b-sr
+                td#c-sr
+            tr
+                th Length
+                td#a-l
+                td#b-l
+                td#c-l
+
+        //input(type="button" value="Click" onclick="run()")
+        script.
+            var vals=[];
+            max_no=10;
+
+            function setup(){
+
+                a_txt=""; b_txt=""; c_txt="";
+                for(i=0;i<vals[0];i++){
+                    a_txt+="#<br>";
+                }
+                for(i=0;i<vals[1];i++){
+                    b_txt+="#<br>";
+                }
+                for(i=0;i<vals[2];i++){
+                    c_txt+="#<br>";
+                }
+
+
+                $('#a-q').html(a_txt);
+                $('#b-q').html(b_txt);
+                $('#c-q').html(c_txt);
+
+                //console.log(a,b,c);
+            }
+
+            function run(){
+                vals[0]=1+Math.floor(Math.random()*10)%max_no;
+                vals[1]=1+Math.floor(Math.random()*10)%max_no;
+                vals[2]=1+Math.floor(Math.random()*10)%max_no;
+                window.setInterval(function () {
+                    n=Math.floor(Math.random()*10)%3;
+
+                    if(vals[n]>0){
+                        console.log(vals[n]--);
+                    }
+
+                    setup();
+                }, 1000); //will call the function after 2 secs.
+            }
+
+            window.onload = function start() {
+                run();
+            }
