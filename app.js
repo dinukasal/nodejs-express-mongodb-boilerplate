@@ -13,6 +13,7 @@ var mongoUri = process.env.MONGOLAB_URI ||
     'mongodb://localhost/piu';
 
 var app = express();
+var jsonexport = require('jsonexport');
 
 // configure our server
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -47,12 +48,51 @@ MongoClient.connect(mongoUri, function (err, db) {
         res.render('add');
     });
 
+    app.get('/thank', function (req, res) {
+        res.render('thank');
+    });
+
+    app.get('/q1', function (req, res) {
+        console.log(req.query);
+        res.render('q1',{data:req.query});
+    });
+
+    app.get('/q2', function (req, res) {
+        res.render('q2',{data:req.query});
+    });
+
+    app.get('/q3', function (req, res) {
+        res.render('q3',{data:req.query});
+    });
+
+    app.get('/q4', function (req, res) {
+        res.render('q4',{data:req.query});
+    });
+
+    app.get('/viewcsv', function (req, res) {
+        db.collection("data").find({},{"_id":0,"name":1,"value":1}).toArray(function(err,docs){
+            jsonexport(docs,function(err,csv){
+
+                res.send(csv);
+            })
+        })
+    });
+
+    app.get('/view', function (req, res) {
+        db.collection("data").find({}).toArray(function(err,docs){
+            res.send(docs);
+        })
+    });
+
     app.get('/lines', function (req, res) {
         res.render('lines');
     });
 
     app.post('/save', function (req, res) {
-        res.send(req.body);
+        //res.send(req.body);
+        db.collection("data").insert(req.body).then(function(err,docs){
+            res.send("data saved!");
+        })
     });
 
     app.post('/', function (req, res) {

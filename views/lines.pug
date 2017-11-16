@@ -40,7 +40,7 @@ html
                 td#b-l
                 td#c-l
 
-        .container#question(style="display:block;padding:5px;position:absolute;top:50%;left:5%")
+        .container#question(style="display:none;padding:5px;position:absolute;top:50%;left:5%")
             | Which queue do you join? 
             br
             br
@@ -105,6 +105,10 @@ html
 
                     console.log("3 timeout");
                 },1000);
+
+                setTimeout(function(){
+                    $(location).attr('href','/q1');
+                },45000);
             }
 
             window.onload = function start() {

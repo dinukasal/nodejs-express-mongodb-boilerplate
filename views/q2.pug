@@ -1,0 +1,71 @@
+html
+    head
+        script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js")
+        title Unusual Waiting in the queue
+
+        style.
+            input{
+                display:inline;
+                float:left;
+            }
+    body
+        h2.
+            It seems there is an unusually long waiting time ahead of you. 
+            <br>You have following options.
+
+        br
+        
+        .container
+            .row
+                input(type="radio" name="option" value="1" class="option")
+                p.
+                    You can change queues, would you? If so what queue? ( 3 queue options should be given to
+                    select, upon selecting they are directed to that queue and would start waiting in the respective
+                    queue)
+            .row
+                input(type="radio" name="option" value="2" class="option")
+                p.
+                    You wish to stay in the same line, no changes.
+
+            .row
+                input(type="radio" name="option" value="3" class="option")
+                p.
+                    You wish to quit the line and go home without buying
+                
+            .row
+                input(type="radio" name="option" value="4" class="option")
+                p.
+                    Provide feedback/complaint.
+            
+            .row
+                label(style="float:left") Name
+                input(type="text" id="name" value=data.name)
+            br
+            br
+            br
+            .row
+                label(style="float:left;") Reason:
+                select(name="reason" id="reason" style="margin-left:20px")
+                    option(value="1") I prefer
+                    option(value="2") other
+            .row(style="margin-top:10px")
+                label(style="float:left;") Feedback:
+                textarea(type="text" id="feedback" style="width:200px;height:100px;margin-left:5px")
+            
+            input(type="button" value="Submit" onclick="submit()")
+
+        script.
+        
+            function submit(){
+                name=$("#name").val();
+                option=$('.option:checked').val()
+                reason=$('#reason').val();
+                feedback=$('#feedback').val();
+                data={name:name,q:2, reason:reason,feedback:feedback,option:option}
+                //- alert(JSON.stringify(data));
+                $.post("/save",data,function(data,status){
+                    alert(data);
+                    $(location).attr('href','/thank');
+                })
+            }
+            console.log(data)
