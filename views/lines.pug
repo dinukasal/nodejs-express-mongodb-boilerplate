@@ -107,7 +107,8 @@ html
                 },1000);
 
                 setTimeout(function(){
-                    $(location).attr('href','/q1');
+                    name=$("#name").val();
+                    $(location).attr('href','/q1?name='+name);
                 },45000);
             }
 
