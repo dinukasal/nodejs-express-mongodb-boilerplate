@@ -13,6 +13,10 @@ html
                 vertical-align: top;
                 padding-left:10px;    
             }
+            input{
+                display:inline;
+                float:left;
+            }
     body
         h1  Shopping Experience Survey
         p(style={padding:'20px'}).
@@ -42,7 +46,7 @@ html
                 td#b-l
                 td#c-l
 
-        .container#question(style="display:none;padding:5px;position:absolute;top:65%;left:5%")
+        .container#question(style="display:none;padding:5px;position:relative;top:65%;left:5%")
             | Which queue do you join? 
             br
             br
@@ -54,7 +58,30 @@ html
             p(style="margin-left:10px") A B C
 
             input(type="text" id="name" name="name" placeholder="your name" style="width:200px")
-            button(type="button" onclick="save()" style="margin-top:20px;margin-left:10px;")="Proceed"
+            br
+            br
+        .container#options_box(style="display:none;padding:5px;position:relative;top:65%;left:5%")
+            | It seems there is an unusually long waiting time ahead of you.
+            | You have following options. 
+
+            .row
+                input(type="radio" name="option" value="1" class="option")
+                p.
+                    You can change queues, would you? If so what queue? ( 3 queue options should be given to
+                    select, upon selecting they are directed to that queue and would start waiting in the respective
+                    queue)
+            .row
+                input(type="radio" name="option" value="2" class="option")
+                p.
+                    You wish to stay in the same line, no changes.
+                
+            .row
+                input(type="radio" name="option" value="3" class="option")
+                p.
+                    Provide feedback/complaint.
+
+            button(type="button" onclick="save()" style="margin-top:20px;margin-left:10px;")="Submit"
+            
 
         //input(type="button" value="Click" onclick="run()")
         script.
@@ -97,6 +124,11 @@ html
                     if(vals[n]>0){
                         //console.log(vals[n]);
                         vals[n]--;
+                        if(vals[0]==3 || vals[1]==0 || vals[2]==1){
+                            setTimeout(function(){
+                                console.log("long delay over..");
+                            },180000)
+                        }
                     }
                     setup();
                     
@@ -110,8 +142,17 @@ html
 
                 setTimeout(function(){
                     name=$("#name").val();
-                    $(location).attr('href','/q1?name='+name);
+                    //$(location).attr('href','/q1?name='+name);
+                    $('#question').hide();
+                    
                 },45000);
+
+                setTimeout(function(){
+                    //name=$("#name").val();
+                    //$(location).attr('href','/q1?name='+name);
+                    $('#options_box').show();
+                    
+                },300000);
             }
 
             window.onload = function start() {
@@ -121,10 +162,17 @@ html
             function save(){
                 value=$('.queue:checked').val()
                 name=$("#name").val();
-                if(name!=""){
-                    $.post("/save", {name:name,value:value},function(data,status){
-                        alert("ok "+status+" "+JSON.stringify(data));
+                option=$('.option:checked').val()
+                data={name:name,value:value,option:option,};
 
+                if(name!=""){
+                    $.post("/save", data,function(data,status){
+                        alert("ok "+status+" "+JSON.stringify(data));
+                        if(option==3){
+                            $(location).attr('href','/feedback?name='+name);
+                        }else{
+                            $(location).attr('href','/thank');
+                        }
                     })
                 }else{
                     alert("Enter name!");

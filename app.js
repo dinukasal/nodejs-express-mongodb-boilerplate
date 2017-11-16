@@ -53,6 +53,10 @@ MongoClient.connect(mongoUri, function (err, db) {
         res.render('thank');
     });
 
+    app.get('/feedback', function (req, res) {
+        res.render('final',{data:req.query});
+    });
+
     app.get('/q1', function (req, res) {
         console.log(req.query);
         res.render('q1',{data:req.query});

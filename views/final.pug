@@ -1,0 +1,36 @@
+html
+    head
+        script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js")
+        title Feeback
+    
+    body
+        .row
+            label Name: 
+            label(id="name")=data.name
+        .row
+            label(style="float:left;") Reason:
+            select(name="reason" id="reason" style="margin-left:20px")
+                option(value="1") I prefer
+                option(value="2") other
+        .row(style="margin-top:10px")
+            label(style="float:left;") Feedback:
+            textarea(type="text" id="feedback" style="width:200px;height:100px;margin-left:5px")
+        
+        input(type="button" value="Submit" onclick="submit()")
+
+
+        script.
+    
+            function submit(){
+                name=$("#name").text();
+                option=$('.option:checked').val()
+                reason=$('#reason').val();
+                feedback=$('#feedback').val();
+                data={name:name,q:1, reason:reason,feedback:feedback,option:option}
+                //- alert(JSON.stringify(data));
+                $.post("/save",data,function(data,status){
+                    alert(data);
+                    $(location).attr('href','/thank');
+                })
+            }
+            console.log(data)
