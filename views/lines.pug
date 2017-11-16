@@ -40,6 +40,20 @@ html
                 td#b-l
                 td#c-l
 
+        .container#question(style="display:block;padding:5px;position:absolute;top:50%;left:5%")
+            | Which queue do you join? 
+            br
+            br
+            //- label.radio-inline
+            input(type="radio" name="queue" value="A" class="queue")
+            input(type="radio" name="queue" value="B" class="queue")
+            input(type="radio" name="queue" value="C" class="queue")
+            br
+            p(style="margin-left:10px") A B C
+
+            input(type="text" id="name" name="name" placeholder="your name" style="width:200px")
+            button(type="button" onclick="save()" style="margin-top:20px;margin-left:10px;")="Save"
+
         //input(type="button" value="Click" onclick="run()")
         script.
             var vals=[];
@@ -79,13 +93,33 @@ html
                     n=Math.floor(Math.random()*10)%3;
 
                     if(vals[n]>0){
-                        console.log(vals[n]--);
+                        //console.log(vals[n]);
+                        vals[n]--;
                     }
                     setup();
                     
                 }, 1000); //will call the function after 2 secs.
+
+                setTimeout(function(){
+                    $('#question').show();
+
+                    console.log("3 timeout");
+                },1000);
             }
 
             window.onload = function start() {
                 run();
+            }
+
+            function save(){
+                value=$('.queue:checked').val()
+                name=$("#name").val();
+                if(name!=""){
+                    $.post("/save", {name:name,value:value},function(data,status){
+                        alert("ok "+status+" "+JSON.stringify(data));
+
+                    })
+                }else{
+                    alert("Enter name!");
+                }
             }

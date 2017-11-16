@@ -51,6 +51,10 @@ MongoClient.connect(mongoUri, function (err, db) {
         res.render('lines');
     });
 
+    app.post('/save', function (req, res) {
+        res.send(req.body);
+    });
+
     app.post('/', function (req, res) {
         var title = req.body.movieTitle;
         var year = req.body.movieYear;
