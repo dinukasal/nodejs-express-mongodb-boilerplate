@@ -3,3 +3,4 @@ node_modules
 yarn.lock
 nohup.out
 nohup*
+script.sh
