@@ -147,11 +147,12 @@ html
         script.
             var vals=[];
             max_no=10;
-            surveyId=Math.floor(Math.random()*1000);
+            surveyId=Math.floor(Math.random()*10000);
 
             lockLine=-1;
+            minimum_ppl=1;
 
-            debugMode=false;
+            debugMode=true;
 
             if(!debugMode){
                 q1Time=120000
@@ -210,7 +211,7 @@ html
 
                 window.setInterval(function () {    //a change 
                     //
-                    if(vals[0]>0){
+                    if(vals[0]>minimum_ppl){
                         //console.log(vals[n]);
                         vals[0]--;
                     }
@@ -218,7 +219,7 @@ html
                 }, 65454); 
 
                 window.setInterval(function () {    //b change
-                    if(vals[1]>0){
+                    if(vals[1]>minimum_ppl){
                         //console.log(vals[n]);
                         vals[1]--;
                     }
@@ -226,7 +227,7 @@ html
                 }, 85714); 
 
                 window.setInterval(function () {    //c change
-                    if(vals[2]>0){
+                    if(vals[2]>minimum_ppl){
                         //console.log(vals[n]);
                         vals[2]--;
                     }
@@ -321,6 +322,7 @@ html
                 })
 
                 $("input[name='option1'").change(function(){ // option set 1
+                    $('.option1').attr('disabled',true);
                     switch(this.value){
                         case '1':
                             $('#queue2').hide();                            
@@ -339,6 +341,7 @@ html
                 });
 
                 $("input[name='option2'").change(function(){ // option set 2
+                    $('.option2').attr('disabled',true);
                     switch(this.value){
                         case '1':
                             $('#queue3').hide();                            
@@ -357,6 +360,7 @@ html
                 });
 
                 $("input[name='option3'").change(function(){ // option set 3
+                    $('.option3').attr('disabled',true);
                     switch(this.value){
                         case '1':
                             $('#queue4').hide();                            
@@ -375,6 +379,8 @@ html
                 });
 
                 $("input[name='option4'").change(function(){ // option set 4
+                    $('.option4').attr('disabled',true);
+                    minimum_ppl=0;
                     switch(this.value){
                         case '1':
                             $('#queue5').hide();                            
