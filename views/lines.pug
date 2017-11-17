@@ -46,7 +46,7 @@ html
                 td#b-l
                 td#c-l
 
-        .container#question(style="display:none;padding:5px;position:relative;top:65%;left:5%")
+        .container#question(style="display:none;padding:5px;position:relative;left:5%")
             | Which queue do you join? 
             br
             br
@@ -57,10 +57,7 @@ html
             br
             p(style="margin-left:10px") A B C
 
-            input(type="text" id="name" name="name" placeholder="your name" style="width:200px")
-            br
-            br
-        .container#options_box(style="display:none;padding:5px;position:relative;top:65%;left:5%")
+        .container#options_box(style="display:none;padding:5px;position:relative;;left:5%")
             | It seems there is an unusually long waiting time ahead of you.
             | You have following options. 
 
@@ -113,9 +110,9 @@ html
                 //- vals[0]=1+Math.floor(Math.random()*10)%max_no;
                 //- vals[1]=1+Math.floor(Math.random()*10)%max_no;
                 //- vals[2]=1+Math.floor(Math.random()*10)%max_no;
-                vals[0]=5; //a
-                vals[1]=2; //a
-                vals[2]=3; //a
+                vals[0]=9; //a
+                vals[1]=5; //a
+                vals[2]=7; //a
                 setup();
 
                 window.setInterval(function () {
@@ -141,18 +138,11 @@ html
                 },1000);
 
                 setTimeout(function(){
-                    name=$("#name").val();
-                    //$(location).attr('href','/q1?name='+name);
-                    $('#question').hide();
-                    
-                },30000);
-
-                setTimeout(function(){
                     //name=$("#name").val();
                     //$(location).attr('href','/q1?name='+name);
                     $('#options_box').show();
                     
-                },300000);
+                },1000);
             }
 
             window.onload = function start() {
@@ -165,7 +155,7 @@ html
                 option=$('.option:checked').val()
                 data={name:name,value:value,option:option,};
 
-                if(name!=""){
+                //if(name!=""){
                     $.post("/save", data,function(data,status){
                         alert("ok "+status+" "+JSON.stringify(data));
                         if(option==3){
@@ -174,7 +164,5 @@ html
                             $(location).attr('href','/thank');
                         }
                     })
-                }else{
-                    alert("Enter name!");
-                }
+                
             }
