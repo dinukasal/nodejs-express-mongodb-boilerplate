@@ -32,12 +32,12 @@ html
         //-     .col 
         table(style={margin:'10px','margin-top':'20px'})
             tr#headtag
-                th 
+                th Queue
                 th.a A
                 th.b B
                 th.c C
             tr  
-                th  Queue
+                th 
                 td.a#a-q
                 td.b#b-q
                 td.c#c-q
@@ -178,21 +178,41 @@ html
                 vals[2]=7; //a
                 setup();
 
-                window.setInterval(function () {
+                window.setInterval(function () {    //a change 
                     n=Math.floor(Math.random()*10)%3;
-
-                    if(vals[n]>0){
+                    //
+                    if(vals[n]<6){
                         //console.log(vals[n]);
-                        vals[n]--;
-                        if(vals[0]==3 || vals[1]==0 || vals[2]==1){
-                            setTimeout(function(){
-                                console.log("long delay over..");
-                            },180000)
-                        }
+                        vals[n]++;
                     }
                     setup();
+                }, 120000); 
 
-                }, 120000); //will call the function after 2 secs.
+
+                window.setInterval(function () {    //a change 
+                    //
+                    if(vals[0]>0){
+                        //console.log(vals[n]);
+                        vals[0]--;
+                    }
+                    setup();
+                }, 65454); 
+
+                window.setInterval(function () {    //b change
+                    if(vals[1]>0){
+                        //console.log(vals[n]);
+                        vals[1]--;
+                    }
+                    setup();
+                }, 94736); 
+
+                window.setInterval(function () {    //c change
+                    if(vals[2]>0){
+                        //console.log(vals[n]);
+                        vals[2]--;
+                    }
+                    setup();
+                }, 65000); 
 
                 setTimeout(function(){
                     $('#queue1').show();
@@ -202,7 +222,7 @@ html
                     //name=$("#name").val();
                     //$(location).attr('href','/q1?name='+name);
                     $('#optionsBox1').show();
-                },4000);
+                },420000);  //option box 1 view time
 
             }
 
@@ -285,7 +305,7 @@ html
                     }
                     setTimeout(function(){
                         $('#optionsBox2').show();
-                    },500);
+                    },12000);
                 });
 
                 $("input[name='option2'").change(function(){ // option set 2
@@ -302,7 +322,7 @@ html
                     }
                     setTimeout(function(){                    
                         $('#optionsBox3').show();
-                    },500);
+                    },420000);
                 });
 
                 $("input[name='option3'").change(function(){ // option set 1
@@ -319,7 +339,7 @@ html
                     }
                     setTimeout(function(){
                         $('#optionsBox4').show();
-                    },500);
+                    },12000);
                 });
 
                 $("input[name='option4'").change(function(){ // option set 2
