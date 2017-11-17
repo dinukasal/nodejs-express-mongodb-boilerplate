@@ -149,6 +149,8 @@ html
             max_no=10;
             surveyId=Math.floor(Math.random()*1000);
 
+            lockLine=-1;
+
             debugMode=false;
 
             if(!debugMode){
@@ -196,9 +198,11 @@ html
                 window.setInterval(function () {    //add people 
                     n=Math.floor(Math.random()*10)%3;
                     //
-                    if(vals[n]<6){
+                    if(vals[n]<6 && n!=lockLine){
                         //console.log(vals[n]);
                         vals[n]++;
+                    }else{
+                        vals[(n+1)%3]++;
                     }
                     setup();
                 }, 90000); 
@@ -299,16 +303,19 @@ html
                             $('.a').css({'border':'2px solid red'});
                             $('.b').css({'border':''});
                             $('.c').css({'border':''});
+                            lockLine=0;
                             break;
                         case 'B':
                             $('.b').css({'border':'2px solid red'});
                             $('.a').css({'border':''});
                             $('.c').css({'border':''});
+                            lockLine=1;
                             break;
                         case 'C':
                             $('.c').css({'border':'2px solid red'});
                             $('.a').css({'border':''});
                             $('.b').css({'border':''});
+                            lockLine=2;
                             break;
                     }
                 })
