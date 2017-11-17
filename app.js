@@ -45,6 +45,10 @@ MongoClient.connect(mongoUri, function (err, db) {
         // });
     });
 
+    app.get('/f', function (req, res) {
+        res.render('final',{id:req.query.id});
+    });
+
     app.get('/0', function (req, res) {
         res.render('home',{show:false});
     });
@@ -71,9 +75,9 @@ MongoClient.connect(mongoUri, function (err, db) {
         res.render('thank');
     });
 
-    app.get('/feedback', function (req, res) {
-        res.render('final',{data:req.query});
-    });
+    // app.get('/feedback', function (req, res) {
+    //     res.render('final',{data:req.query});
+    // });
 
     app.get('/viewcsv', function (req, res) {
         db.collection("data").find({},{"_id":0,"name":1,"value":1}).toArray(function(err,docs){

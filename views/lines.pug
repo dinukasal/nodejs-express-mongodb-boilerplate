@@ -147,6 +147,7 @@ html
         script.
             var vals=[];
             max_no=10;
+            surveyId=Math.floor(Math.random()*1000);
 
             function setup(){
 
@@ -173,7 +174,7 @@ html
                 //- vals[0]=1+Math.floor(Math.random()*10)%max_no;
                 //- vals[1]=1+Math.floor(Math.random()*10)%max_no;
                 //- vals[2]=1+Math.floor(Math.random()*10)%max_no;
-                vals[0]=9; //a
+                vals[0]=8; //a
                 vals[1]=5; //a
                 vals[2]=7; //a
                 setup();
@@ -246,7 +247,9 @@ html
                 queue5=$('.queue5:checked').val()
 
                 data={
+                    survey_id:surveyId,
                     datetime: (new Date()).toString(),
+                    show_service_rate:'#{show}' ,
                     queue1:queue1,
                     option1:option1,
                     
@@ -262,13 +265,14 @@ html
                     queue5:queue5
                     };
 
-                if(true)
+
+                if(0)
                     $.post("/save", data,function(data,status){
                         alert("ok "+status+" "+JSON.stringify(data));
-                        $(location).attr('href','/feedback');
+                        $(location).attr('href','/f?id='+surveyId);
                     })
 
-                //alert(JSON.stringify(data));
+                alert(JSON.stringify(data));
             }
                 
                 $("input[name='queue'").change(function(){
@@ -304,6 +308,7 @@ html
                             
                     }
                     setTimeout(function(){
+                        $('#optionsBox1').hide();
                         $('#optionsBox2').show();
                     },12000);
                 });
@@ -320,7 +325,8 @@ html
                             break;
                             
                     }
-                    setTimeout(function(){                    
+                    setTimeout(function(){       
+                        $('#optionsBox2').hide();             
                         $('#optionsBox3').show();
                     },240000);
                 });
@@ -338,6 +344,7 @@ html
                             
                     }
                     setTimeout(function(){
+                        $('#optionsBox3').hide();
                         $('#optionsBox4').show();
                     },12000);
                 });
@@ -354,9 +361,6 @@ html
                             break;
                             
                     }
+                    
                     $('#submitButton').show();
                 });
-
-                function optionSet2(){
-
-                }
