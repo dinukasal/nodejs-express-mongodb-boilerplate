@@ -45,7 +45,7 @@ html
                 tr  
                     th  Service Rate
                     td.a#a-sr 55/hr
-                    td.b#b-sr 45/hr
+                    td.b#b-sr 42/hr
                     td.c#c-sr 38/hr
 
         .container#queue1(style="display:block;padding:5px;position:relative;left:5%")
@@ -291,6 +291,26 @@ html
                         $('#optionsBox1').show();
                         $('#queue1').hide();
                     },initialTime);  //option box 1 view time
+                })
+
+                $("input[name='queue'").change(function(){
+                    switch(this.value){
+                        case 'A':
+                            $('.a').css({'border':'2px solid red'});
+                            $('.b').css({'border':''});
+                            $('.c').css({'border':''});
+                            break;
+                        case 'B':
+                            $('.b').css({'border':'2px solid red'});
+                            $('.a').css({'border':''});
+                            $('.c').css({'border':''});
+                            break;
+                        case 'C':
+                            $('.c').css({'border':'2px solid red'});
+                            $('.a').css({'border':''});
+                            $('.b').css({'border':''});
+                            break;
+                    }
                 })
 
                 $("input[name='option1'").change(function(){ // option set 1
