@@ -60,7 +60,7 @@ html
             p(style="margin-left:10px") A B C
 
         .container#optionsBox1(style="display:none;padding:5px;position:relative;;left:5%")
-            |2) It seems there is an unusually long waiting time ahead of you.
+            |2) Your queue is experiencing some delays. Your waiting time may change. 
             | You have following options. 
 
             .row
@@ -101,7 +101,7 @@ html
                     p(style="margin-left:10px") A B C 
 
         .container#optionsBox3(style="display:none;padding:5px;position:relative;;left:5%")
-            |4) It seems there is an unusually long waiting time ahead of you.
+            |4) Your queue is experiencing some delays. Your waiting time may change. 
             | You have following options. 
 
             .row
@@ -178,7 +178,7 @@ html
                 vals[2]=7; //a
                 setup();
 
-                window.setInterval(function () {    //a change 
+                window.setInterval(function () {    //add people 
                     n=Math.floor(Math.random()*10)%3;
                     //
                     if(vals[n]<6){
@@ -186,7 +186,7 @@ html
                         vals[n]++;
                     }
                     setup();
-                }, 120000); 
+                }, 90000); 
 
 
                 window.setInterval(function () {    //a change 
@@ -222,7 +222,7 @@ html
                     //name=$("#name").val();
                     //$(location).attr('href','/q1?name='+name);
                     $('#optionsBox1').show();
-                },420000);  //option box 1 view time
+                },180000);  //option box 1 view time
 
             }
 
@@ -322,7 +322,7 @@ html
                     }
                     setTimeout(function(){                    
                         $('#optionsBox3').show();
-                    },420000);
+                    },240000);
                 });
 
                 $("input[name='option3'").change(function(){ // option set 1
