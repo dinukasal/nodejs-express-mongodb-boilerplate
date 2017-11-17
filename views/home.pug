@@ -9,9 +9,17 @@ html
         input(type="button" onclick='gotoLine()' style={margin:'5px'} value="Start")
         script.
             setTimeout(function () {
-                window.location.href = "/lines"; //will redirect to your blog page (an ex: blog.html)
+                gotoLine();
+
             }, 30000); //will call the function after 2 secs.
 
             function gotoLine(){
-                window.location.href = "/lines"; 
+                display="#{show}";
+                console.log(display);
+                if(display=='true')
+                    window.location.href = "/lines?show=true"; 
+                else
+                    window.location.href = "/lines?show=false"; 
+
             }
+            

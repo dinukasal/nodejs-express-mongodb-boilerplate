@@ -45,7 +45,19 @@ MongoClient.connect(mongoUri, function (err, db) {
         // });
     });
 
-    app.get('/967', function (req, res) {
+    app.get('/0', function (req, res) {
+        res.render('home',{show:false});
+    });
+
+    app.get('/1', function (req, res) {
+        res.render('home',{show:true});
+    });
+
+    app.get('/lines', function (req, res) {
+        res.render('lines',{show:req.query.show});
+    });
+
+    app.get('/967', function (req, res) {   //clear data
         db.collection("data").remove({},function(err,removed){
             res.send(removed);
         });
@@ -63,23 +75,6 @@ MongoClient.connect(mongoUri, function (err, db) {
         res.render('final',{data:req.query});
     });
 
-    app.get('/q1', function (req, res) {
-        console.log(req.query);
-        res.render('q1',{data:req.query});
-    });
-
-    app.get('/q2', function (req, res) {
-        res.render('q2',{data:req.query});
-    });
-
-    app.get('/q3', function (req, res) {
-        res.render('q3',{data:req.query});
-    });
-
-    app.get('/q4', function (req, res) {
-        res.render('q4',{data:req.query});
-    });
-
     app.get('/viewcsv', function (req, res) {
         db.collection("data").find({},{"_id":0,"name":1,"value":1}).toArray(function(err,docs){
             jsonexport(docs,function(err,csv){
@@ -93,10 +88,6 @@ MongoClient.connect(mongoUri, function (err, db) {
         db.collection("data").find({}).toArray(function(err,docs){
             res.send(docs);
         })
-    });
-
-    app.get('/lines', function (req, res) {
-        res.render('lines');
     });
 
     app.post('/save', function (req, res) {

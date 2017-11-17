@@ -41,11 +41,12 @@ html
                 td.a#a-q
                 td.b#b-q
                 td.c#c-q
-            tr  
-                th  Service Rate
-                td.a#a-sr 55/hr
-                td.b#b-sr 45/hr
-                td.c#c-sr 38/hr
+            if(show=='true')
+                tr  
+                    th  Service Rate
+                    td.a#a-sr 55/hr
+                    td.b#b-sr 45/hr
+                    td.c#c-sr 38/hr
 
         .container#queue1(style="display:block;padding:5px;position:relative;left:5%")
             |1) Which queue do you join? 
