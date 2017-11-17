@@ -48,7 +48,7 @@ html
                 td.c#c-sr 38/hr
 
         .container#queue1(style="display:block;padding:5px;position:relative;left:5%")
-            | Which queue do you join? 
+            |1) Which queue do you join? 
             br
             br
             //- label.radio-inline
@@ -59,16 +59,16 @@ html
             p(style="margin-left:10px") A B C
 
         .container#optionsBox1(style="display:none;padding:5px;position:relative;;left:5%")
-            | It seems there is an unusually long waiting time ahead of you.
+            |2) It seems there is an unusually long waiting time ahead of you.
             | You have following options. 
 
             .row
-                input(type="radio" id="radioA" name="option1" value="1" class="option")
+                input(type="radio" id="radioA" name="option1" value="1" class="option1")
                 p.
                     Remain on the same queue
  
             .row
-                input(type="radio" id="radioB" name="option1" value="2" class="option")
+                input(type="radio" id="radioB" name="option1" value="2" class="option1")
                 p.
                     Choose to move to a different queue
                 .row#queue2(style="margin-left:25px;display:none")
@@ -80,16 +80,16 @@ html
 
         
         .container#optionsBox2(style="display:none;padding:5px;position:relative;;left:5%")
-            | It seems others are jockeying. (A customer enters one line and then switches to a different one in an effort to reduce the waiting time.)
+            |3) It seems others are jockeying. (A customer enters one line and then switches to a different one in an effort to reduce the waiting time.)
             | You have following options. 
 
             .row
-                input(type="radio" id="radioA" name="option2" value="1" class="option")
+                input(type="radio" id="radioA" name="option2" value="1" class="option2")
                 p.
                     Remain on the same queue
  
             .row
-                input(type="radio" id="radioB" name="option2" value="2" class="option")
+                input(type="radio" id="radioB" name="option2" value="2" class="option2")
                 p.
                     Choose to move to a different queue
                 .row#queue3(style="margin-left:25px;display:none")
@@ -99,8 +99,49 @@ html
                     br
                     p(style="margin-left:10px") A B C 
 
+        .container#optionsBox3(style="display:none;padding:5px;position:relative;;left:5%")
+            |4) It seems there is an unusually long waiting time ahead of you.
+            | You have following options. 
 
-        button(type="button" onclick="save()" style="margin-top:20px;margin-left:10px;")="Submit"
+            .row
+                input(type="radio" id="radioA" name="option3" value="1" class="option3")
+                p.
+                    Remain on the same queue
+ 
+            .row
+                input(type="radio" id="radioB" name="option3" value="2" class="option3")
+                p.
+                    Choose to move to a different queue
+                .row#queue4(style="margin-left:25px;display:none")
+                    input(type="radio" name="queue" value="A" class="queue4")
+                    input(type="radio" name="queue" value="B" class="queue4")
+                    input(type="radio" name="queue" value="C" class="queue4") 
+                    br
+                    p(style="margin-left:10px") A B C                   
+
+        
+        .container#optionsBox4(style="display:none;padding:5px;position:relative;;left:5%")
+            |5) It seems others are jockeying. (A customer enters one line and then switches to a different one in an effort to reduce the waiting time.)
+            | You have following options. 
+
+            .row
+                input(type="radio" id="radioA" name="option4" value="1" class="option4")
+                p.
+                    Remain on the same queue
+ 
+            .row
+                input(type="radio" id="radioB" name="option4" value="2" class="option4")
+                p.
+                    Choose to move to a different queue
+                .row#queue5(style="margin-left:25px;display:none")
+                    input(type="radio" name="queue" value="A" class="queue5")
+                    input(type="radio" name="queue" value="B" class="queue5")
+                    input(type="radio" name="queue" value="C" class="queue5") 
+                    br
+                    p(style="margin-left:10px") A B C 
+
+
+        button(id="submitButton" type="button" onclick="save()" style="display:none;margin-top:20px;margin-left:10px;")="Submit"
 
         script.
             var vals=[];
@@ -160,7 +201,7 @@ html
                     //name=$("#name").val();
                     //$(location).attr('href','/q1?name='+name);
                     $('#optionsBox1').show();
-                },1000);
+                },4000);
 
             }
 
@@ -169,16 +210,44 @@ html
             }
 
             function save(){
-                value=$('.queue1:checked').val()
-                option=$('.option:checked').val()
-                data={value:value,option:option};
+                queue1=$('.queue1:checked').val()
+                option1=$('.option1:checked').val()
 
-                //if(name!=""){
+                queue2=$('.queue2:checked').val()
+                option2=$('.option2:checked').val()
+
+                queue3=$('.queue3:checked').val()
+                option3=$('.option3:checked').val()
+
+                queue4=$('.queue4:checked').val()
+                option4=$('.option4:checked').val()
+
+                queue5=$('.queue5:checked').val()
+
+                data={
+                    datetime: (new Date()).toString(),
+                    queue1:queue1,
+                    option1:option1,
+                    
+                    queue2:queue2,
+                    option2:option2,
+                    
+                    queue3:queue3,
+                    option3:option3,
+
+                    queue4:queue4,
+                    option4:option4,
+
+                    queue5:queue5
+                    };
+
+                if(true)
                     $.post("/save", data,function(data,status){
                         alert("ok "+status+" "+JSON.stringify(data));
                         $(location).attr('href','/feedback');
                     })
 
+                //alert(JSON.stringify(data));
             }
                 
                 $("input[name='queue'").change(function(){
@@ -205,15 +274,17 @@ html
                     switch(this.value){
                         case '1':
                             $('#queue2').hide();                            
-                            $('#queue1').show();
+                            
                             break;
                         case '2':
                             $('#queue1').hide();
                             $('#queue2').show();
-                            $('#optionsBox2').show();
                             break;
                             
                     }
+                    setTimeout(function(){
+                        $('#optionsBox2').show();
+                    },500);
                 });
 
                 $("input[name='option2'").change(function(){ // option set 2
@@ -222,12 +293,47 @@ html
                             $('#queue3').hide();                            
                             $('#queue2').show();
                             break;
-                        case '2':
+                        case '2':   // should wait until two ppl from the same line goes
                             $('#queue2').hide();
                             $('#queue3').show();
                             break;
                             
                     }
+                    setTimeout(function(){                    
+                        $('#optionsBox3').show();
+                    },500);
+                });
+
+                $("input[name='option3'").change(function(){ // option set 1
+                    switch(this.value){
+                        case '1':
+                            $('#queue4').hide();                            
+                            $('#queue3').show();
+                            break;
+                        case '2':
+                            $('#queue3').hide();
+                            $('#queue4').show();
+                            break;
+                            
+                    }
+                    setTimeout(function(){
+                        $('#optionsBox4').show();
+                    },500);
+                });
+
+                $("input[name='option4'").change(function(){ // option set 2
+                    switch(this.value){
+                        case '1':
+                            $('#queue5').hide();                            
+                            $('#queue4').show();
+                            break;
+                        case '2':   // should wait until two ppl from the same line goes
+                            $('#queue4').hide();
+                            $('#queue5').show();
+                            break;
+                            
+                    }
+                    $('#submitButton').show();
                 });
 
                 function optionSet2(){
