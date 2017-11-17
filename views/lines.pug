@@ -223,6 +223,7 @@ html
                     //name=$("#name").val();
                     //$(location).attr('href','/q1?name='+name);
                     $('#optionsBox1').show();
+                    $('#queue1').hide();
                 },180000);  //option box 1 view time
 
             }
@@ -266,13 +267,12 @@ html
                     };
 
 
-                if(0)
                     $.post("/save", data,function(data,status){
                         alert("ok "+status+" "+JSON.stringify(data));
                         $(location).attr('href','/f?id='+surveyId);
                     })
 
-                alert(JSON.stringify(data));
+                //- alert(JSON.stringify(data));
             }
                 
                 $("input[name='queue'").change(function(){
