@@ -41,8 +41,14 @@ MongoClient.connect(mongoUri, function (err, db) {
     app.get('/', function (req, res) {
         //db.collection('movies').find({}).toArray(function (err, docs) {
             //res.render('index', { 'movies': docs });
-            res.render("lines");
+            res.render("home");
         // });
+    });
+
+    app.get('/967', function (req, res) {
+        db.collection("data").remove({},function(err,removed){
+            res.send(removed);
+        });
     });
 
     app.get('/add', function (req, res) {

@@ -12,75 +12,96 @@ html
             td {
                 vertical-align: top;
                 padding-left:10px;    
+                text-align:center;
+                font-size:30px;
             }
             input{
                 display:inline;
                 float:left;
             }
+            table{
+                font-size:20px
+            }
+
     body
         h1  Shopping Experience Survey
-        p(style={padding:'20px'}).
-                Imagine you are in a retail grocery store (Super market) to buy your day to day requirements. Upon
-                buying the required products you come in to the counter area and witness 3 service queues
+        //- p(style={padding:'20px'}).
+        //-         Imagine you are in a retail grocery store (Super market) to buy your day to day requirements. Upon
+        //-         buying the required products you come in to the counter area and witness 3 service queues
         //- .container
         //-     .col 
         table(style={margin:'10px','margin-top':'20px'})
             tr#headtag
                 th 
-                th A
-                th B
-                th C
+                th.a A
+                th.b B
+                th.c C
             tr  
                 th  Queue
-                td#a-q
-                td#b-q
-                td#c-q
+                td.a#a-q
+                td.b#b-q
+                td.c#c-q
             tr  
                 th  Service Rate
-                td#a-sr
-                td#b-sr
-                td#c-sr
-            tr
-                th Length
-                td#a-l
-                td#b-l
-                td#c-l
+                td.a#a-sr 55/hr
+                td.b#b-sr 45/hr
+                td.c#c-sr 38/hr
 
-        .container#question(style="display:none;padding:5px;position:relative;left:5%")
+        .container#queue1(style="display:block;padding:5px;position:relative;left:5%")
             | Which queue do you join? 
             br
             br
             //- label.radio-inline
-            input(type="radio" name="queue" value="A" class="queue")
-            input(type="radio" name="queue" value="B" class="queue")
-            input(type="radio" name="queue" value="C" class="queue")
+            input(type="radio" name="queue" value="A" class="queue1")
+            input(type="radio" name="queue" value="B" class="queue1")
+            input(type="radio" name="queue" value="C" class="queue1")
             br
             p(style="margin-left:10px") A B C
 
-        .container#options_box(style="display:none;padding:5px;position:relative;;left:5%")
+        .container#optionsBox1(style="display:none;padding:5px;position:relative;;left:5%")
             | It seems there is an unusually long waiting time ahead of you.
             | You have following options. 
 
             .row
-                input(type="radio" name="option" value="1" class="option")
+                input(type="radio" id="radioA" name="option1" value="1" class="option")
                 p.
-                    You can change queues, would you? If so what queue? ( 3 queue options should be given to
-                    select, upon selecting they are directed to that queue and would start waiting in the respective
-                    queue)
+                    Remain on the same queue
+ 
             .row
-                input(type="radio" name="option" value="2" class="option")
+                input(type="radio" id="radioB" name="option1" value="2" class="option")
                 p.
-                    You wish to stay in the same line, no changes.
-                
+                    Choose to move to a different queue
+                .row#queue2(style="margin-left:25px;display:none")
+                    input(type="radio" name="queue" value="A" class="queue2")
+                    input(type="radio" name="queue" value="B" class="queue2")
+                    input(type="radio" name="queue" value="C" class="queue2") 
+                    br
+                    p(style="margin-left:10px") A B C                   
+
+        
+        .container#optionsBox2(style="display:none;padding:5px;position:relative;;left:5%")
+            | It seems others are jockeying. (A customer enters one line and then switches to a different one in an effort to reduce the waiting time.)
+            | You have following options. 
+
             .row
-                input(type="radio" name="option" value="3" class="option")
+                input(type="radio" id="radioA" name="option2" value="1" class="option")
                 p.
-                    Provide feedback/complaint.
+                    Remain on the same queue
+ 
+            .row
+                input(type="radio" id="radioB" name="option2" value="2" class="option")
+                p.
+                    Choose to move to a different queue
+                .row#queue3(style="margin-left:25px;display:none")
+                    input(type="radio" name="queue" value="A" class="queue3")
+                    input(type="radio" name="queue" value="B" class="queue3")
+                    input(type="radio" name="queue" value="C" class="queue3") 
+                    br
+                    p(style="margin-left:10px") A B C 
 
-            button(type="button" onclick="save()" style="margin-top:20px;margin-left:10px;")="Submit"
-            
 
-        //input(type="button" value="Click" onclick="run()")
+        button(type="button" onclick="save()" style="margin-top:20px;margin-left:10px;")="Submit"
+
         script.
             var vals=[];
             max_no=10;
@@ -128,21 +149,19 @@ html
                         }
                     }
                     setup();
-                    
+
                 }, 120000); //will call the function after 2 secs.
 
                 setTimeout(function(){
-                    $('#question').show();
-
-                    console.log("3 timeout");
+                    $('#queue1').show();
                 },1000);
 
                 setTimeout(function(){
                     //name=$("#name").val();
                     //$(location).attr('href','/q1?name='+name);
-                    $('#options_box').show();
-                    
+                    $('#optionsBox1').show();
                 },1000);
+
             }
 
             window.onload = function start() {
@@ -150,19 +169,67 @@ html
             }
 
             function save(){
-                value=$('.queue:checked').val()
-                name=$("#name").val();
+                value=$('.queue1:checked').val()
                 option=$('.option:checked').val()
-                data={name:name,value:value,option:option,};
+                data={value:value,option:option};
 
                 //if(name!=""){
                     $.post("/save", data,function(data,status){
                         alert("ok "+status+" "+JSON.stringify(data));
-                        if(option==3){
-                            $(location).attr('href','/feedback?name='+name);
-                        }else{
-                            $(location).attr('href','/thank');
-                        }
+                        $(location).attr('href','/feedback');
                     })
-                
+
             }
+                
+                $("input[name='queue'").change(function(){
+                    switch(this.value){
+                        case 'A':
+                            $('.a').css({'border':'2px solid red'});
+                            $('.b').css({'border':''});
+                            $('.c').css({'border':''});
+                            break;
+                        case 'B':
+                            $('.b').css({'border':'2px solid red'});
+                            $('.a').css({'border':''});
+                            $('.c').css({'border':''});
+                            break;
+                        case 'C':
+                            $('.c').css({'border':'2px solid red'});
+                            $('.a').css({'border':''});
+                            $('.b').css({'border':''});
+                            break;
+                    }
+                })
+
+                $("input[name='option1'").change(function(){ // option set 1
+                    switch(this.value){
+                        case '1':
+                            $('#queue2').hide();                            
+                            $('#queue1').show();
+                            break;
+                        case '2':
+                            $('#queue1').hide();
+                            $('#queue2').show();
+                            $('#optionsBox2').show();
+                            break;
+                            
+                    }
+                });
+
+                $("input[name='option2'").change(function(){ // option set 2
+                    switch(this.value){
+                        case '1':
+                            $('#queue3').hide();                            
+                            $('#queue2').show();
+                            break;
+                        case '2':
+                            $('#queue2').hide();
+                            $('#queue3').show();
+                            break;
+                            
+                    }
+                });
+
+                function optionSet2(){
+
+                }

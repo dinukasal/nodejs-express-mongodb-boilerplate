@@ -5,9 +5,6 @@ html
     
     body
         .row
-            label Name: 
-            label(id="name")=data.name
-        .row
             label(style="float:left;") Reason:
             select(name="reason" id="reason" style="margin-left:20px")
                 option(value="1") I prefer
@@ -33,4 +30,3 @@ html
                     $(location).attr('href','/thank');
                 })
             }
-            console.log(data)
