@@ -45,9 +45,9 @@ html
                     feedback:feedback,
                     option:option
                     }
-                alert(JSON.stringify(data));
-                //- $.post("/save",data,function(data,status){
-                //-     alert(data);
-                //-     $(location).attr('href','/thank');
-                //- })
+                //- alert(JSON.stringify(data));
+                $.post("/save",data,function(data,status){
+                    alert(data);
+                    $(location).attr('href','/thank');
+                })
             }

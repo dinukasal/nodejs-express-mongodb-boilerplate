@@ -149,6 +149,20 @@ html
             max_no=10;
             surveyId=Math.floor(Math.random()*1000);
 
+            debugMode=true;
+
+            if(!debugMode){
+                q1Time=120000
+                q2Time=240000
+                q3Time=120000
+                initialTime=180000
+            }else{
+                q1Time=500
+                q2Time=500
+                q3Time=500
+                initialTime=500
+            }
+
             function setup(){
 
                 a_txt=""; b_txt=""; c_txt="";
@@ -205,7 +219,7 @@ html
                         vals[1]--;
                     }
                     setup();
-                }, 94736); 
+                }, 85714); 
 
                 window.setInterval(function () {    //c change
                     if(vals[2]>0){
@@ -219,12 +233,6 @@ html
                     $('#queue1').show();
                 },1000);
 
-                setTimeout(function(){
-                    //name=$("#name").val();
-                    //$(location).attr('href','/q1?name='+name);
-                    $('#optionsBox1').show();
-                    $('#queue1').hide();
-                },180000);  //option box 1 view time
 
             }
 
@@ -275,24 +283,14 @@ html
                 //- alert(JSON.stringify(data));
             }
                 
-                $("input[name='queue'").change(function(){
-                    switch(this.value){
-                        case 'A':
-                            $('.a').css({'border':'2px solid red'});
-                            $('.b').css({'border':''});
-                            $('.c').css({'border':''});
-                            break;
-                        case 'B':
-                            $('.b').css({'border':'2px solid red'});
-                            $('.a').css({'border':''});
-                            $('.c').css({'border':''});
-                            break;
-                        case 'C':
-                            $('.c').css({'border':'2px solid red'});
-                            $('.a').css({'border':''});
-                            $('.b').css({'border':''});
-                            break;
-                    }
+                $("input[class='queue1'").change(function(){
+                    $('.queue1').attr('disabled',true);
+                    setTimeout(function(){
+                        //name=$("#name").val();
+                        //$(location).attr('href','/q1?name='+name);
+                        $('#optionsBox1').show();
+                        $('#queue1').hide();
+                    },initialTime);  //option box 1 view time
                 })
 
                 $("input[name='option1'").change(function(){ // option set 1
@@ -310,7 +308,7 @@ html
                     setTimeout(function(){
                         $('#optionsBox1').hide();
                         $('#optionsBox2').show();
-                    },12000);
+                    },q1Time);
                 });
 
                 $("input[name='option2'").change(function(){ // option set 2
@@ -328,10 +326,10 @@ html
                     setTimeout(function(){       
                         $('#optionsBox2').hide();             
                         $('#optionsBox3').show();
-                    },240000);
+                    },q2Time);
                 });
 
-                $("input[name='option3'").change(function(){ // option set 1
+                $("input[name='option3'").change(function(){ // option set 3
                     switch(this.value){
                         case '1':
                             $('#queue4').hide();                            
@@ -346,10 +344,10 @@ html
                     setTimeout(function(){
                         $('#optionsBox3').hide();
                         $('#optionsBox4').show();
-                    },12000);
+                    },q3Time);
                 });
 
-                $("input[name='option4'").change(function(){ // option set 2
+                $("input[name='option4'").change(function(){ // option set 4
                     switch(this.value){
                         case '1':
                             $('#queue5').hide();                            
