@@ -1,0 +1,66 @@
+html
+    head
+        title Shopping Experience Evaluation
+        script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js")
+    body
+        h1  Shopping Experience Evaluation
+        
+        form(action="/demographic" method="post")
+            table(style="font-size:20")
+                tr
+                    td
+                        label Name
+                    td
+                        input(type="text" name="name")
+                tr
+                    td
+                        label Contact No
+                    td
+                        input(type="text" name="contact")
+                tr
+                    td
+                        label Gender
+                    td
+                        select(style="font-size:16")
+                            option(value="male") Male
+                            option(value="female") Female
+
+                tr
+                    td
+                        label Age
+                    td
+                        input(type="text" name="age")
+                tr
+                    td
+                        label Emplyment Status
+                    td
+                        input(type="text" name="employment")
+                tr
+                    td
+                        label Education
+                    td
+                        input(type="text" name="education")
+            input(type="text" id="surveyId" style="display:none" name="survey_id")
+            input(type="submit" onclick='gotoLine()' style="margin:'5px';font-size:16px" value="Continue")        
+        
+        script.
+            surveyId=Math.floor(Math.random()*10000);
+            $('#surveyId').val(surveyId);
+            localStorage.setItem('surveyId',surveyId);
+
+            setTimeout(function () {
+                //gotoLine();
+
+            }, 30000); //will call the function after 2 secs.
+
+            function gotoLine(){
+                display="#{show}";
+                display=localStorage.getItem('display');
+                console.log(display);
+                if(display=='true')
+                    window.location.href = "/lines?show=true"; 
+                else
+                    window.location.href = "/lines?show=false"; 
+            }
+            
+            

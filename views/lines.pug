@@ -22,6 +22,11 @@ html
             table{
                 font-size:20px
             }
+            div{
+                font-size:"20px"
+            }
+        
+        basefont(size="16px")
 
     body
         h1  Shopping Experience Survey
@@ -36,6 +41,14 @@ html
                 th.a A
                 th.b B
                 th.c C
+            tr
+                td
+                td
+                    img(src="/images/cashier.png" style="width:40;height:40")
+                td
+                    img(src="/images/cashier.png" style="width:40;height:40")
+                td
+                    img(src="/images/cashier.png" style="width:40;height:40")
             tr  
                 th 
                 td.a#a-q
@@ -47,112 +60,117 @@ html
                     td.a#a-sr 55/hr
                     td.b#b-sr 42/hr
                     td.c#c-sr 38/hr
+        font(size="+2")
+            .container#queue1(style="display:block;padding:5px;position:relative;left:5%")
+                |1) Which queue do you join? 
+                br
+                br
+                //- label.radio-inline
+                input(type="radio" name="queue" value="A" class="queue1")
+                input(type="radio" name="queue" value="B" class="queue1")
+                input(type="radio" name="queue" value="C" class="queue1")
+                br
+                p(style="margin-left:10px") A B C
 
-        .container#queue1(style="display:block;padding:5px;position:relative;left:5%")
-            |1) Which queue do you join? 
-            br
-            br
-            //- label.radio-inline
-            input(type="radio" name="queue" value="A" class="queue1")
-            input(type="radio" name="queue" value="B" class="queue1")
-            input(type="radio" name="queue" value="C" class="queue1")
-            br
-            p(style="margin-left:10px") A B C
+            .container#optionsBox1(style="display:none;padding:5px;position:relative;;left:5%")
+                |2) Your queue is experiencing delays. Your waiting time may change. 
+                | You have the following options. 
 
-        .container#optionsBox1(style="display:none;padding:5px;position:relative;;left:5%")
-            |2) Your queue is experiencing some delays. Your waiting time may change. 
-            | You have following options. 
+                .row
+                    input(type="radio" id="radioA" name="option1" value="1" class="option1")
+                    p.
+                        Remain on the same queue
+    
+                .row
+                    input(type="radio" id="radioB" name="option1" value="2" class="option1")
+                    p.
+                        Choose to move to a different queue
+                    .row#queue2(style="margin-left:25px;display:none")
+                        input(type="radio" name="queue" value="A" class="queue2")
+                        input(type="radio" name="queue" value="B" class="queue2")
+                        input(type="radio" name="queue" value="C" class="queue2") 
+                        br
+                        p(style="margin-left:10px") A B C                   
 
-            .row
-                input(type="radio" id="radioA" name="option1" value="1" class="option1")
-                p.
-                    Remain on the same queue
- 
-            .row
-                input(type="radio" id="radioB" name="option1" value="2" class="option1")
-                p.
-                    Choose to move to a different queue
-                .row#queue2(style="margin-left:25px;display:none")
-                    input(type="radio" name="queue" value="A" class="queue2")
-                    input(type="radio" name="queue" value="B" class="queue2")
-                    input(type="radio" name="queue" value="C" class="queue2") 
-                    br
-                    p(style="margin-left:10px") A B C                   
+            
+            .container#optionsBox2(style="display:none;padding:5px;position:relative;;left:5%")
+                |3) It seems others are jockeying. (A customer enters one line and then switches to a different one in an effort to reduce the waiting time.)
+                | You have the following options. 
 
-        
-        .container#optionsBox2(style="display:none;padding:5px;position:relative;;left:5%")
-            |3) It seems others are jockeying. (A customer enters one line and then switches to a different one in an effort to reduce the waiting time.)
-            | You have following options. 
+                .row
+                    input(type="radio" id="radioA" name="option2" value="1" class="option2")
+                    p.
+                        Remain on the same queue
+    
+                .row
+                    input(type="radio" id="radioB" name="option2" value="2" class="option2")
+                    p.
+                        Choose to move to a different queue
+                    .row#queue3(style="margin-left:25px;display:none")
+                        input(type="radio" name="queue" value="A" class="queue3")
+                        input(type="radio" name="queue" value="B" class="queue3")
+                        input(type="radio" name="queue" value="C" class="queue3") 
+                        br
+                        p(style="margin-left:10px") A B C 
 
-            .row
-                input(type="radio" id="radioA" name="option2" value="1" class="option2")
-                p.
-                    Remain on the same queue
- 
-            .row
-                input(type="radio" id="radioB" name="option2" value="2" class="option2")
-                p.
-                    Choose to move to a different queue
-                .row#queue3(style="margin-left:25px;display:none")
-                    input(type="radio" name="queue" value="A" class="queue3")
-                    input(type="radio" name="queue" value="B" class="queue3")
-                    input(type="radio" name="queue" value="C" class="queue3") 
-                    br
-                    p(style="margin-left:10px") A B C 
+            .container#optionsBox3(style="display:none;padding:5px;position:relative;;left:5%")
+                |4) Your queue is experiencing delays. Your waiting time may change. 
+                | You have the following options. 
 
-        .container#optionsBox3(style="display:none;padding:5px;position:relative;;left:5%")
-            |4) Your queue is experiencing some delays. Your waiting time may change. 
-            | You have following options. 
+                .row
+                    input(type="radio" id="radioA" name="option3" value="1" class="option3")
+                    p.
+                        Remain on the same queue
+    
+                .row
+                    input(type="radio" id="radioB" name="option3" value="2" class="option3")
+                    p.
+                        Choose to move to a different queue
+                    .row#queue4(style="margin-left:25px;display:none")
+                        input(type="radio" name="queue" value="A" class="queue4")
+                        input(type="radio" name="queue" value="B" class="queue4")
+                        input(type="radio" name="queue" value="C" class="queue4") 
+                        br
+                        p(style="margin-left:10px") A B C                   
 
-            .row
-                input(type="radio" id="radioA" name="option3" value="1" class="option3")
-                p.
-                    Remain on the same queue
- 
-            .row
-                input(type="radio" id="radioB" name="option3" value="2" class="option3")
-                p.
-                    Choose to move to a different queue
-                .row#queue4(style="margin-left:25px;display:none")
-                    input(type="radio" name="queue" value="A" class="queue4")
-                    input(type="radio" name="queue" value="B" class="queue4")
-                    input(type="radio" name="queue" value="C" class="queue4") 
-                    br
-                    p(style="margin-left:10px") A B C                   
+            
+            .container#optionsBox4(style="display:none;padding:5px;position:relative;;left:5%")
+                |5) It seems others are jockeying. (A customer enters one line and then switches to a different one in an effort to reduce the waiting time.)
+                | You have the following options. 
 
-        
-        .container#optionsBox4(style="display:none;padding:5px;position:relative;;left:5%")
-            |5) It seems others are jockeying. (A customer enters one line and then switches to a different one in an effort to reduce the waiting time.)
-            | You have following options. 
+                .row
+                    input(type="radio" id="radioA" name="option4" value="1" class="option4")
+                    p.
+                        Remain on the same queue
+    
+                .row
+                    input(type="radio" id="radioB" name="option4" value="2" class="option4")
+                    p.
+                        Choose to move to a different queue
+                    .row#queue5(style="margin-left:25px;display:none")
+                        input(type="radio" name="queue" value="A" class="queue5")
+                        input(type="radio" name="queue" value="B" class="queue5")
+                        input(type="radio" name="queue" value="C" class="queue5") 
+                        br
+                        p(style="margin-left:10px") A B C 
 
-            .row
-                input(type="radio" id="radioA" name="option4" value="1" class="option4")
-                p.
-                    Remain on the same queue
- 
-            .row
-                input(type="radio" id="radioB" name="option4" value="2" class="option4")
-                p.
-                    Choose to move to a different queue
-                .row#queue5(style="margin-left:25px;display:none")
-                    input(type="radio" name="queue" value="A" class="queue5")
-                    input(type="radio" name="queue" value="B" class="queue5")
-                    input(type="radio" name="queue" value="C" class="queue5") 
-                    br
-                    p(style="margin-left:10px") A B C 
-
-
-        button(id="submitButton" type="button" onclick="save()" style="display:none;margin-top:20px;margin-left:10px;")="Submit"
+            button(id="continueButton" type="button" onclick="display_message()" style="display:none;margin-top:20px;margin-left:10px;font-size:16px")="Continue"
+            button(id="submitButton" type="button" onclick="save()" style="display:none;margin-top:20px;margin-left:10px;font-size:16px")="Submit"
 
         script.
             var vals=[];
             max_no=10;
-            surveyId=Math.floor(Math.random()*10000);
+            //- surveyId=Math.floor(Math.random()*10000);
+            surveyId=localStorage.getItem('surveyId');
 
             lockLine=-1;
-            minimum_ppl=1;
+            minimum_ppl=2;
 
             debugMode=false;
+
+            window.onload = function start() {
+                run();
+            }
 
             if(!debugMode){
                 q1Time=120000
@@ -167,16 +185,16 @@ html
             }
 
             function setup(){
-
+                head_image="<img src='/images/head.jpg' style='height:35;width:35;margin-top:5px'/><br>"
                 a_txt=""; b_txt=""; c_txt="";
                 for(i=0;i<vals[0];i++){
-                    a_txt+="#<br>";
+                    a_txt+=head_image;    //"#<br>"
                 }
                 for(i=0;i<vals[1];i++){
-                    b_txt+="#<br>";
+                    b_txt+=head_image;
                 }
                 for(i=0;i<vals[2];i++){
-                    c_txt+="#<br>";
+                    c_txt+=head_image;
                 }
 
 
@@ -185,6 +203,11 @@ html
                 $('#c-q').html(c_txt);
 
                 //console.log(a,b,c);
+            }
+
+            function display_message(){
+                alert('We acknowledge your selection. Please wait patiently till you are served in the queue');
+                $("#continueButton").attr("disabled",true);
             }
 
             function run(){
@@ -241,9 +264,6 @@ html
 
             }
 
-            window.onload = function start() {
-                run();
-            }
 
             function save(){
                 queue1=$('.queue1:checked').val()
@@ -289,7 +309,9 @@ html
             }
                 
                 $("input[class='queue1'").change(function(){
-                    $('.queue1').attr('disabled',true);
+                    $('.queue1').attr('disabled',true); // make ABC radio buttons disabled
+                    $("#continueButton").attr("disabled",false);
+                    $('#continueButton').show();
                     setTimeout(function(){
                         //name=$("#name").val();
                         //$(location).attr('href','/q1?name='+name);
@@ -323,6 +345,8 @@ html
 
                 $("input[name='option1'").change(function(){ // option set 1
                     $('.option1').attr('disabled',true);
+                    $("#continueButton").attr("disabled",false);
+                    $('#continueButton').show();
                     switch(this.value){
                         case '1':
                             $('#queue2').hide();                            
@@ -342,6 +366,8 @@ html
 
                 $("input[name='option2'").change(function(){ // option set 2
                     $('.option2').attr('disabled',true);
+                    $("#continueButton").attr("disabled",false);
+                    $('#continueButton').show();
                     switch(this.value){
                         case '1':
                             $('#queue3').hide();                            
@@ -361,6 +387,8 @@ html
 
                 $("input[name='option3'").change(function(){ // option set 3
                     $('.option3').attr('disabled',true);
+                    $("#continueButton").attr("disabled",false);
+                    $('#continueButton').show();
                     switch(this.value){
                         case '1':
                             $('#queue4').hide();                            
@@ -380,6 +408,8 @@ html
 
                 $("input[name='option4'").change(function(){ // option set 4
                     $('.option4').attr('disabled',true);
+                    $("#continueButton").attr("disabled",false);
+                    $('#continueButton').show();
                     minimum_ppl=0;
                     switch(this.value){
                         case '1':

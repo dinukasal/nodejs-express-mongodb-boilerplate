@@ -25,6 +25,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static('public'));
 
 // pug configuration
 const pug = require('pug');
@@ -43,6 +44,16 @@ MongoClient.connect(mongoUri, function (err, db) {
             //res.render('index', { 'movies': docs });
             res.render("home");
         // });
+    });
+
+    app.get('/demographic', function (req, res) {
+        res.render('demographic');
+    });
+
+    app.post('/demographic', function (req, res) {
+        db.collection("data").insert(req.body).then(function(){
+            res.render('intro');
+        })
     });
 
     app.get('/f', function (req, res) {

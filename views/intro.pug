@@ -1,0 +1,30 @@
+html
+    head
+        title Shopping Experience Evaluation
+    body
+        h1  Shopping Experience Evaluation
+        font(size="5")
+            p(style="padding:'20px'").
+                    Imagine you are in a retail grocery store (supermarket) to buy your day to day requirements during peak hour. 
+                    Upon filling your shopping cart, you proceed to the store exit and witness 3 service queues (cashier counters).
+        input(type="button" onclick='gotoLine()' style="margin:'5px';font-size:16px" value="Continue")
+        script.
+
+            setTimeout(function () {
+                //gotoLine();
+
+            }, 30000); //will call the function after 2 secs.
+
+            function gotoLine(){
+                //display="#{show}";
+                display=localStorage.getItem('display');
+                console.log(display);
+                //- if(display=='true')
+                //-     localStorage.setItem('display','true');
+                //- else
+                //-     //- window.location.href = "/lines?show=false"; 
+                //-     localStorage.setItem('display','false');
+                window.location.href = "/lines?show="+display; 
+            }
+            
+            

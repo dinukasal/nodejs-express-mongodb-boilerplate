@@ -3,13 +3,15 @@ html
         title Shopping Experience Evaluation
     body
         h1  Shopping Experience Evaluation
-        p(style={padding:'20px'}).
-                Imagine you are in a retail grocery store (supermarket) to buy your day to day requirements during peak hour. 
-                Upon filling your shopping cart, you proceed to the store exit and witness 3 service queues (cashier counters).
-        input(type="button" onclick='gotoLine()' style={margin:'5px'} value="Start")
+        font(size="5")
+            p(style="padding:'20px'").
+                    This study is to understand your decision-making process related to queues in a supermarket. Upon successful completion of the experiment every participant would be provided with an incentive and depending on your performance you will be included in a lottery draw. (The results of the lottery draw would be announced after a week of the experiment)
+                    While undergoing this experiment you should not talk or collaborate among each other and avoid using mobile phones.
+        input(type="button" onclick='gotoLine()' style="margin:'5px';font-size:16px" value="Continue")
         script.
+
             setTimeout(function () {
-                gotoLine();
+                //gotoLine();
 
             }, 30000); //will call the function after 2 secs.
 
@@ -17,9 +19,11 @@ html
                 display="#{show}";
                 console.log(display);
                 if(display=='true')
-                    window.location.href = "/lines?show=true"; 
+                    localStorage.setItem('display','true');
                 else
-                    window.location.href = "/lines?show=false"; 
-
+                    //- window.location.href = "/lines?show=false"; 
+                    localStorage.setItem('display','false');
+                window.location.href = "/demographic"; 
             }
+            
             
