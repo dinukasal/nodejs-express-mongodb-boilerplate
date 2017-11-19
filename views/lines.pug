@@ -167,8 +167,10 @@ html
             minimum_ppl=2;
 
             debugMode=false;
+            time1=0;
 
             window.onload = function start() {
+                date1=performance.now();
                 run();
             }
 
@@ -214,9 +216,9 @@ html
                 //- vals[0]=1+Math.floor(Math.random()*10)%max_no;
                 //- vals[1]=1+Math.floor(Math.random()*10)%max_no;
                 //- vals[2]=1+Math.floor(Math.random()*10)%max_no;
-                vals[0]=8; //a
-                vals[1]=5; //a
-                vals[2]=7; //a
+                vals[0]=10; //a
+                vals[1]=7; //a
+                vals[2]=9; //a
                 setup();
 
                 window.setInterval(function () {    //add people 
@@ -263,7 +265,29 @@ html
 
 
             }
+            function parseTime(s) {
+                var part = s.match(/(\d+):(\d+)(?: )?(am|pm)?/i);
+                var hh = parseInt(part[1], 10);
+                var mm = parseInt(part[2], 10);
+                var ap = part[3] ? part[3].toUpperCase() : null;
+                if (ap === "AM") {
+                    if (hh == 12) {
+                        hh = 0;
+                    }
+                }
+                if (ap === "PM") {
+                    if (hh != 12) {
+                        hh += 12;
+                    }
+                }
+                return { hh: hh, mm: mm };
+            }
 
+            function millisToMinutesAndSeconds(millis) {
+                var minutes = Math.floor(millis / 60000);
+                var seconds = ((millis % 60000) / 1000).toFixed(0);
+                return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+            }
 
             function save(){
                 queue1=$('.queue1:checked').val()
@@ -280,10 +304,25 @@ html
 
                 queue5=$('.queue5:checked').val()
 
+                waiting_time=0; // waiting time calculation
+                const timePromise=new Promise((resolve,reject)=>{
+                    waiting_time=performance.now();
+
+                    if (waiting_time < date1) {
+                        waiting_time.setDate(date2.getDate() + 1);
+                    }
+
+                    waiting_time-=time1;
+                    waiting_time=millisToMinutesAndSeconds(waiting_time);
+                    //waiting_time=parseTime(waiting_time);
+                    console.log(waiting_time)
+                    localStorage.setItem('waiting_time',waiting_time);
+                })
                 data={
                     survey_id:surveyId,
                     datetime: (new Date()).toString(),
                     show_service_rate:'#{show}' ,
+                    waiting_time:waiting_time,
                     queue1:queue1,
                     option1:option1,
                     
@@ -302,7 +341,7 @@ html
 
                     $.post("/save", data,function(data,status){
                         alert("ok "+status+" "+JSON.stringify(data));
-                        $(location).attr('href','/f?id='+surveyId);
+                        $(location).attr('href','/thank');
                     })
 
                 //- alert(JSON.stringify(data));

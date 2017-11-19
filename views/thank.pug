@@ -1,6 +1,17 @@
 html
     head
-        title Thanks
+        title Thank You
+        script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js")
     body
-        p.
-            Thanks!
+        font(size="5")
+            p You was waiting 
+            label(id="time")
+            p.
+                We acknowledge your patience and support. Thank you very much! 
+                <br>Would you like to lodge a complaint with the store manager?
+            input(type="button" onclick="location.href='/f'" value="Yes" style="font-size:16") 
+            input(type="button" onclick="window.close()" value="No" style="margin-left:5px;font-size:16") 
+        script.
+            waiting_time=localStorage.getItem('waiting_time');
+            $('#time').html(waiting_time+" (mm:ss)")
+            console.log(waiting_time)

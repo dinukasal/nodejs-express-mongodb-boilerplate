@@ -6,25 +6,25 @@ html
     body
         font(size="5")
             .row
-                label(style="float:left;margin-top:4px") Reason:
-                select(name="reason" id="reason" style="margin-left:10px;font-size:16px")
-                    option(value="queue_length") Queue Length
-                    option(value="waiting_time") Waiting Time
-                    option(value="service") Service
+                //- label(style="float:left;margin-top:4px") Reason:
+                //- select(name="reason" id="reason" style="margin-left:10px;font-size:16px")
+                //-     option(value="queue_length") Queue Length
+                //-     option(value="waiting_time") Waiting Time
+                //-     option(value="service") Service
                 
-                input(type="radio" name="satis" value="satis" class="satis")
-                label Satisfactory
-                input(type="radio" name="satis" value="not_satis" class="satis")
-                label Not Satisfactory
+                //- input(type="radio" name="satis" value="satis" class="satis")
+                //- label Satisfactory
+                //- input(type="radio" name="satis" value="not_satis" class="satis")
+                //- label Not Satisfactory
 
-                p Would you return to our supermarket outlet again? If no, Why?
+                p * Would you return to our supermarket outlet again? If no, Why?
                 input(type="radio" name="return" value="yes" class="return")
                 label Yes
                 input(type="radio" name="return" value="no" class="return")
                 label No
 
             .row(style="margin-top:10px")
-                label(style="float:left;") Feedback:
+                label(style="float:left;") * Feedback:
                 textarea(type="text" id="feedback" style="width:200px;height:100px;margin-left:5px")
             
             input(type="button" value="Submit" style=";font-size:16px" onclick="submit()")
@@ -32,6 +32,7 @@ html
 
         script.
             id='#{id}';    
+            id=localStorage.getItem('surveyId');
             function submit(){
                 option=$('.option:checked').val()
                 reason=$('#reason').val();
