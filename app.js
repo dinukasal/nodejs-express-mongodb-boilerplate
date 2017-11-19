@@ -46,6 +46,10 @@ MongoClient.connect(mongoUri, function (err, db) {
         // });
     });
 
+    app.get('/final_final', function (req, res) {
+        res.render('final_final');
+    });
+
     app.get('/demographic', function (req, res) {
         res.render('demographic');
     });
