@@ -66,9 +66,9 @@ html
                 br
                 br
                 //- label.radio-inline
-                input(type="radio" name="queue" value="A" class="queue1")
-                input(type="radio" name="queue" value="B" class="queue1")
-                input(type="radio" name="queue" value="C" class="queue1")
+                input(type="radio" name="queue1" value="A" class="queue1")
+                input(type="radio" name="queue1" value="B" class="queue1")
+                input(type="radio" name="queue1" value="C" class="queue1")
                 br
                 p(style="margin-left:10px") A B C
 
@@ -86,9 +86,9 @@ html
                     p.
                         Choose to move to a different queue
                     .row#queue2(style="margin-left:25px;display:none")
-                        input(type="radio" name="queue" value="A" class="queue2")
-                        input(type="radio" name="queue" value="B" class="queue2")
-                        input(type="radio" name="queue" value="C" class="queue2") 
+                        input(type="radio" name="queue2" value="A" class="queue2")
+                        input(type="radio" name="queue2" value="B" class="queue2")
+                        input(type="radio" name="queue2" value="C" class="queue2") 
                         br
                         p(style="margin-left:10px") A B C                   
 
@@ -107,9 +107,9 @@ html
                     p.
                         Choose to move to a different queue
                     .row#queue3(style="margin-left:25px;display:none")
-                        input(type="radio" name="queue" value="A" class="queue3")
-                        input(type="radio" name="queue" value="B" class="queue3")
-                        input(type="radio" name="queue" value="C" class="queue3") 
+                        input(type="radio" name="queue3" value="A" class="queue3")
+                        input(type="radio" name="queue3" value="B" class="queue3")
+                        input(type="radio" name="queue3" value="C" class="queue3") 
                         br
                         p(style="margin-left:10px") A B C 
 
@@ -127,9 +127,9 @@ html
                     p.
                         Choose to move to a different queue
                     .row#queue4(style="margin-left:25px;display:none")
-                        input(type="radio" name="queue" value="A" class="queue4")
-                        input(type="radio" name="queue" value="B" class="queue4")
-                        input(type="radio" name="queue" value="C" class="queue4") 
+                        input(type="radio" name="queue4" value="A" class="queue4")
+                        input(type="radio" name="queue4" value="B" class="queue4")
+                        input(type="radio" name="queue4" value="C" class="queue4") 
                         br
                         p(style="margin-left:10px") A B C                   
 
@@ -148,9 +148,9 @@ html
                     p.
                         Choose to move to a different queue
                     .row#queue5(style="margin-left:25px;display:none")
-                        input(type="radio" name="queue" value="A" class="queue5")
-                        input(type="radio" name="queue" value="B" class="queue5")
-                        input(type="radio" name="queue" value="C" class="queue5") 
+                        input(type="radio" name="queue5" value="A" class="queue5")
+                        input(type="radio" name="queue5" value="B" class="queue5")
+                        input(type="radio" name="queue5" value="C" class="queue5") 
                         br
                         p(style="margin-left:10px") A B C 
 
@@ -166,7 +166,7 @@ html
             lockLine=-1;
             minimum_ppl=2;
 
-            debugMode=false;
+            debugMode=true;
             time1=0;
 
             window.onload = function start() {
@@ -180,10 +180,10 @@ html
                 q3Time=120000
                 initialTime=180000
             }else{
-                q1Time=500
-                q2Time=500
-                q3Time=500
-                initialTime=500
+                q1Time=1500
+                q2Time=1500
+                q3Time=1500
+                initialTime=1500
             }
 
             function setup(){
@@ -338,7 +338,7 @@ html
                     queue5:queue5
                     };
 
-
+                //- alert("ok "+JSON.stringify(data));
                     $.post("/save", data,function(data,status){
                         alert("ok "+status+" "+JSON.stringify(data));
                         $(location).attr('href','/thank');
@@ -448,7 +448,7 @@ html
                 $("input[name='option4'").change(function(){ // option set 4
                     $('.option4').attr('disabled',true);
                     $("#continueButton").attr("disabled",false);
-                    $('#continueButton').show();
+                    $('#continueButton').hide();
                     minimum_ppl=0;
                     switch(this.value){
                         case '1':
