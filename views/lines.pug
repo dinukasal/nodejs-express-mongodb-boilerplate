@@ -289,6 +289,31 @@ html
                 return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
             }
 
+            function red_border(queue){
+                $("input[name='"+queue+"'").change(function(){
+                    switch(this.value){
+                        case 'A':
+                            $('.a').css({'border':'2px solid red'});
+                            $('.b').css({'border':''});
+                            $('.c').css({'border':''});
+                            lockLine=0;
+                            break;
+                        case 'B':
+                            $('.b').css({'border':'2px solid red'});
+                            $('.a').css({'border':''});
+                            $('.c').css({'border':''});
+                            lockLine=1;
+                            break;
+                        case 'C':
+                            $('.c').css({'border':'2px solid red'});
+                            $('.a').css({'border':''});
+                            $('.b').css({'border':''});
+                            lockLine=2;
+                            break;
+                    }
+                })
+            }
+
             function save(){
                 queue1=$('.queue1:checked').val()
                 option1=$('.option1:checked').val()
@@ -359,28 +384,11 @@ html
                     },initialTime);  //option box 1 view time
                 })
 
-                $("input[name='queue'").change(function(){
-                    switch(this.value){
-                        case 'A':
-                            $('.a').css({'border':'2px solid red'});
-                            $('.b').css({'border':''});
-                            $('.c').css({'border':''});
-                            lockLine=0;
-                            break;
-                        case 'B':
-                            $('.b').css({'border':'2px solid red'});
-                            $('.a').css({'border':''});
-                            $('.c').css({'border':''});
-                            lockLine=1;
-                            break;
-                        case 'C':
-                            $('.c').css({'border':'2px solid red'});
-                            $('.a').css({'border':''});
-                            $('.b').css({'border':''});
-                            lockLine=2;
-                            break;
-                    }
-                })
+                red_border("queue1");
+                red_border("queue2");
+                red_border("queue3");
+                red_border("queue4");
+                red_border("queue5");
 
                 $("input[name='option1'").change(function(){ // option set 1
                     $('.option1').attr('disabled',true);
